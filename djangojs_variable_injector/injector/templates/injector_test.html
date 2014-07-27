@@ -1,0 +1,12 @@
+{% load js_injector %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	{% js_injector %}
+	<script type="text/javascript" src="{{ STATIC_URL }}injector_test.js"></script>
+</body>
+</html>
