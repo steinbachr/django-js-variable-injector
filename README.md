@@ -7,14 +7,15 @@ Provides a (more) elegant solution for injecting Django template variables into 
 Installation
 =====
 1. ``pip install django-js-variable-injector``
-2. add injector to ``INSTALLED_APPS``
+2. add ``injector`` to ``INSTALLED_APPS``
 
 =====
 Usage
 =====
 Using the injector has two parts:
+
 1. Load the template tag library
-2. Wrap your javascript exectution in the djangovars function.
+2. Wrap your javascript execution in the djangovars function.
 
 Of course, I will elaborate. We'll use the following as an example:
 
@@ -56,7 +57,6 @@ djangovars(['yo', 'mr white', 'science', 'bitch'], function(y, m, s, b) {
     ... your logic here ...
 });
 ````
-
 
 
 =====
