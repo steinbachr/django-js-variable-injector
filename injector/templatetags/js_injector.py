@@ -19,10 +19,12 @@ class InjectionMapNode(template.Node):
             return 'true' if val else 'false'
         elif type(val) is str:
             return "'{v}'".format(v=val)
+        elif type(val) is int or type(val) is float:
+            return val
         elif val is None:
             return 'null'
         else:
-            return val
+            return ''
 
     def render(self, context):
         html = "<script>"
