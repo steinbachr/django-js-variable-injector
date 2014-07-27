@@ -14,7 +14,7 @@ A (more) elegant solution for injecting Django template variables into the conte
       author_email='steinbach.rj@gmail.com',
       url='https://github.com/steinbachr/django-js-variable-injector',
       license='MIT',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+      packages=['djangojs_variable_injector.injector', 'djangojs_variable_injector.injector.templatetags'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
