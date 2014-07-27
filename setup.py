@@ -1,7 +1,32 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.0'
+
+def get_packages(package):
+    """
+    Return root package and all sub-packages.
+    """
+    return [dirpath
+            for dirpath, dirnames, filenames in os.walk(package)
+            if os.path.exists(os.path.join(dirpath, '__init__.py'))]
+
+def get_package_data(package):
+    """
+    Return all files under the root package, that are not in a
+    package themselves.
+    """
+    walk = [(dirpath.replace(package + os.sep, '', 1), filenames)
+            for dirpath, dirnames, filenames in os.walk(package)
+            if not os.path.exists(os.path.join(dirpath, '__init__.py'))]
+
+    filepaths = []
+    for base, filenames in walk:
+        filepaths.extend([os.path.join(base, filename)
+                          for filename in filenames])
+    return {package: filepaths}
+
+
+version = '1.0.3'
 
 setup(name='django-js-variable-injector',
       version=version,
@@ -14,13 +39,8 @@ A (more) elegant solution for injecting Django template variables into the conte
       author_email='steinbach.rj@gmail.com',
       url='https://github.com/steinbachr/django-js-variable-injector',
       license='MIT',
-      packages=['djangojs_variable_injector.injector', 'djangojs_variable_injector.injector.templatetags'],
+      packages=get_packages('injector'),
+      package_data=get_package_data('injector'),
       include_package_data=True,
-      zip_safe=False,
-      install_requires=[
-          # -*- Extra requirements: -*-
-      ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
+      zip_safe=False
       )

@@ -2,6 +2,10 @@ setup.py
 django_js_variable_injector.egg-info/PKG-INFO
 django_js_variable_injector.egg-info/SOURCES.txt
 django_js_variable_injector.egg-info/dependency_links.txt
-django_js_variable_injector.egg-info/entry_points.txt
 django_js_variable_injector.egg-info/not-zip-safe
 django_js_variable_injector.egg-info/top_level.txt
+injector/__init__.py
+injector/models.py
+injector/views.py
+injector/templatetags/__init__.py
+injector/templatetags/js_injector.py
