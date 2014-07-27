@@ -19,8 +19,24 @@ class InjectionMapNode(template.Node):
             return 'true' if val else 'false'
         elif type(val) is str:
             return "'{v}'".format(v=val)
-        elif type(val) is int or type(val) is float or type(val) is list or type(val) is dict or type(val) is tuple:
+        elif type(val) is unicode:
+            return "'{v}'".format(v=str(val))
+        elif type(val) is int or type(val) is float:
             return val
+        elif type(val) is list or type(val) is tuple:
+            escaped = "["
+            for v in val:
+                escaped += "{val},".format(val=self._js_val_converter(v))
+            escaped = escaped.rstrip(",")
+            escaped += "]"
+            return escaped
+        elif type(val) is dict:
+            escaped = "{"
+            for k, v in val.items():
+                escaped += "{k}:{v},".format(k=str(k), v=self._js_val_converter(v))
+            escaped = escaped.rstrip(",")
+            escaped += "}"
+            return escaped
         else:
             return 'null'
 

@@ -11,5 +11,12 @@ def injector_test(request):
         'test_str': 'hey',
         'test_int': 2,
         'test_bool': True,
-        'test_none': None
+        'test_none': None,
+        'test_unicode': unicode('test'),
+        'test_complex1': [1, unicode('test')],
+        'test_complex2': {
+            'a': 1,
+            'b': unicode('test'),
+            1: 'c'
+        }
 	})
