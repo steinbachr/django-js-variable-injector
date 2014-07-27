@@ -26,7 +26,7 @@ def get_package_data(package):
     return {package: filepaths}
 
 
-version = '1.0.3'
+version = '1.0.4'
 
 setup(name='django-js-variable-injector',
       version=version,

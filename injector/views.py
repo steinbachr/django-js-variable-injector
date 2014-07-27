@@ -7,5 +7,9 @@ def injector_test(request):
 			'a': 1,
 			'b': 2,
 			'c': 3
-		}
+		},
+        'test_str': 'hey',
+        'test_int': 2,
+        'test_bool': True,
+        'test_none': None
 	})
