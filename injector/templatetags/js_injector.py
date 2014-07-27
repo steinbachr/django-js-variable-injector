@@ -19,20 +19,21 @@ class InjectionMapNode(template.Node):
             return 'true' if val else 'false'
         elif type(val) is str:
             return "'{v}'".format(v=val)
-        elif type(val) is int or type(val) is float:
+        elif type(val) is int or type(val) is float or type(val) is list or type(val) is dict or type(val) is tuple:
             return val
-        elif val is None:
-            return 'null'
         else:
-            return ''
+            return 'null'
 
     def render(self, context):
         html = "<script>"
         html += "var djangovar_map = {"
 
-        view_variables = context.dicts[-1]
-        for var_name, var_val in view_variables.items():
-            html += "{var}: {var_val},".format(var=var_name, var_val=self._js_val_converter(var_val))
+        context_dicts = context.dicts
+        for context_dict in context_dicts:
+            # known limitiation which might have to be addressed: if the context contains several keys of the same name
+            # in different dictionaries, they will override each other here
+            for var_name, var_val in context_dict.items():
+                html += "{var}: {var_val},".format(var=var_name, var_val=self._js_val_converter(var_val))
 
         html = html.rstrip(',')
         html += "};"
