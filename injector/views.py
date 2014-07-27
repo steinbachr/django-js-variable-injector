@@ -17,6 +17,7 @@ def injector_test(request):
         'test_complex2': {
             'a': 1,
             'b': unicode('test'),
-            1: 'c'
+            1: 'c',
+            'c': '\'test\''
         }
 	})

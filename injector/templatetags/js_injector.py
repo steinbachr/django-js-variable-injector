@@ -1,5 +1,6 @@
 import datetime
 from django import template
+import re
 import json
 import pdb
 
@@ -18,9 +19,9 @@ class InjectionMapNode(template.Node):
         if type(val) is bool:
             return 'true' if val else 'false'
         elif type(val) is str:
-            return "'{v}'".format(v=val)
+            return "'{v}'".format(v=re.escape(val))
         elif type(val) is unicode:
-            return "'{v}'".format(v=str(val))
+            return "'{v}'".format(v=re.escape(str(val)))
         elif type(val) is int or type(val) is float:
             return val
         elif type(val) is list or type(val) is tuple:
