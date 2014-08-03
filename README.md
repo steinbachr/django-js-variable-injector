@@ -46,8 +46,7 @@ Now, we have two different ways that we can inject the variables. Here is the fi
 <html>
 <head>
   {% js_injector %}
-  <script type="text/javascript" src="{{STATIC_URL}}injector_test.js"></script>
-  (your scripts should be below the injector)
+  <script type="text/javascript" src="{{STATIC_URL}}injector_test.js"></script> <-- (your scripts should be below the injector)
 	<title></title>
 </head>
 <body>
@@ -66,8 +65,7 @@ The other (more granular) way is as follows:
 <html>
 <head>
   {% js_injector yo mr_white science bitch %}
-  <script type="text/javascript" src="{{STATIC_URL}}injector_test.js"></script>
-  (your scripts should be below the injector)
+  <script type="text/javascript" src="{{STATIC_URL}}injector_test.js"></script> <-- (your scripts should be below the injector)
 	<title></title>
 </head>
 <body>
@@ -85,6 +83,7 @@ djangovars(['yo', 'mr_white', 'science', 'bitch'], function(y, m, s, b) {
 ````
 
 Omitting variables is also valid, i.e.:
+
 **test.html**
 ````
 {% load js_injector %}
@@ -93,8 +92,7 @@ Omitting variables is also valid, i.e.:
 <html>
 <head>
   {% js_injector yo bitch %}
-  <script type="text/javascript" src="{{STATIC_URL}}injector_test.js"></script>
-  (your scripts should be below the injector)
+  <script type="text/javascript" src="{{STATIC_URL}}injector_test.js"></script> <-- (your scripts should be below the injector)
 	<title></title>
 </head>
 <body>
