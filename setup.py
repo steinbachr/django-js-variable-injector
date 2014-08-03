@@ -26,14 +26,14 @@ def get_package_data(package):
     return {package: filepaths}
 
 
-version = '1.0.8'
+version = '1.1.0'
 
 setup(name='django-js-variable-injector',
       version=version,
       description="A (more) elegant solution for injecting Django template variables into the context of an external Javascript file",
       long_description="""\
 A (more) elegant solution for injecting Django template variables into the context of an external Javascript file""",
-      classifiers=['Development Status :: 3 - Alpha'], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      classifiers=['Development Status :: 4 - Beta'], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       keywords='django js injection template variables',
       author='Bobby Steinbach',
       author_email='steinbach.rj@gmail.com',
