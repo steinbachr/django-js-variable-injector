@@ -1,4 +1,4 @@
-djangovars(['test_int', 'test_arr', 'test_dict', 'test_str', 'test_bool', 'test_none', 'test_unicode', 'test_complex1', 'test_complex2'], function(int, arr, dict, str, bool, none, uni, com1, com2) {
+djangovars(['test_int', 'test_arr', 'test_dict', 'test_str', 'test_bool', 'test_none', 'test_unicode', 'test_complex1', 'test_complex2', 'test_class'], function(int, arr, dict, str, bool, none, uni, com1, com2, cls) {
     console.log(arr);
     console.log(dict);
     console.log(str);
@@ -8,4 +8,5 @@ djangovars(['test_int', 'test_arr', 'test_dict', 'test_str', 'test_bool', 'test_
     console.log(uni);
     console.log(com1);
     console.log(com2);
+    console.log(cls);
 });

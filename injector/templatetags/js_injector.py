@@ -38,6 +38,10 @@ class InjectionMapNode(template.Node):
             escaped = escaped.rstrip(",")
             escaped += "}"
             return escaped
+        elif isinstance(val, object):
+            obj_fields = val.__dict__
+            escaped = self._js_val_converter(obj_fields)
+            return escaped
         else:
             return 'null'
 
@@ -48,10 +52,12 @@ class InjectionMapNode(template.Node):
         html = ''
         context_dicts = context.dicts
         for context_dict in context_dicts:
-            # known limitiation which might have to be addressed: if the context contains several keys of the same name
-            # in different dictionaries, they will override each other here
             for var_name, var_val in context_dict.items():
-                html += "{var}: {var_val},".format(var=var_name, var_val=self._js_val_converter(var_val))
+                try:
+                    js_val = self._js_val_converter(var_val)
+                except Exception:
+                    js_val = 'null'
+                html += "{var}: {var_val},".format(var=var_name, var_val=js_val)
 
         return html
 
@@ -64,7 +70,11 @@ class InjectionMapNode(template.Node):
         for var in self.django_variables:
             try:
                 var_val = template.Variable(var).resolve(context)
-                html += "{var}: {var_val},".format(var=var, var_val=self._js_val_converter(var_val))
+                try:
+                    js_val = self._js_val_converter(var_val)
+                except Exception:
+                    js_val = 'null'
+                html += "{var}: {var_val},".format(var=var, var_val=js_val)
             except template.VariableDoesNotExist:
                 html += "{var}: null,".format(var=var)
 
