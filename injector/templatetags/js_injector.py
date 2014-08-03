@@ -8,8 +8,8 @@ register = template.Library()
 
 
 class InjectionMapNode(template.Node):
-    def __init__(self):
-        pass
+    def __init__(self, django_variables):
+        self.django_variables = django_variables
 
     def _js_val_converter(self, val):
         """
@@ -41,16 +41,43 @@ class InjectionMapNode(template.Node):
         else:
             return 'null'
 
-    def render(self, context):
-        html = "<script>"
-        html += "var djangovar_map = {"
-
+    def _render_all_context(self, context):
+        """
+        when django_variables doesn't exist, we render everything in the context into the html
+        """
+        html = ''
         context_dicts = context.dicts
         for context_dict in context_dicts:
             # known limitiation which might have to be addressed: if the context contains several keys of the same name
             # in different dictionaries, they will override each other here
             for var_name, var_val in context_dict.items():
                 html += "{var}: {var_val},".format(var=var_name, var_val=self._js_val_converter(var_val))
+
+        return html
+
+    def _render_from_variables(self, context):
+        """
+        if django_variables does exist, we use this method to render the passed django variables into javascript
+        variables
+        """
+        html = ''
+        for var in self.django_variables:
+            try:
+                var_val = template.Variable(var).resolve(context)
+                html += "{var}: {var_val},".format(var=var, var_val=self._js_val_converter(var_val))
+            except template.VariableDoesNotExist:
+                html += "{var}: null,".format(var=var)
+
+        return html
+
+    def render(self, context):
+        html = "<script>"
+        html += "var djangovar_map = {"
+
+        if self.django_variables:
+            html += self._render_from_variables(context)
+        else:
+            html += self._render_all_context(context)
 
         html = html.rstrip(',')
         html += "};"
@@ -75,4 +102,10 @@ class InjectionMapNode(template.Node):
 
 @register.tag(name="js_injector")
 def js_injector(parser, token):
-    return InjectionMapNode()
+    try:
+        token_contents = token.split_contents()
+        tag_name, django_variables = token_contents[0], token_contents[1:]
+    except ValueError:
+        django_variables = []
+
+    return InjectionMapNode(django_variables)
