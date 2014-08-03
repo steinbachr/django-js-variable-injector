@@ -106,10 +106,10 @@ Omitting variables is also valid, i.e.:
 =====
 Known Bugs / Planned Improvements
 =====
-~~1. Add some type of handling for non-primitives~~
-2. Error catching
-3. More suggestions welcome!
+1. Error catching
+2. More suggestions welcome!
 
-=====
+
+===
 If you like the injector and are using it, please star or fork :)
-=====
+
