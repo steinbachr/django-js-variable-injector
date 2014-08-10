@@ -1,5 +1,5 @@
-import datetime
 from django import template
+from django.conf import settings
 import re
 import json
 import pdb
@@ -10,6 +10,8 @@ register = template.Library()
 class InjectionMapNode(template.Node):
     def __init__(self, django_variables):
         self.django_variables = django_variables
+        # set the name of the JS map from the user's settings file or use the default
+        self.map_name = getattr(settings, 'INJECTOR_MAP_NAME', 'djangovar_map')
 
     def _js_val_converter(self, val):
         """
@@ -82,7 +84,7 @@ class InjectionMapNode(template.Node):
 
     def render(self, context):
         html = "<script>"
-        html += "var djangovar_map = {"
+        html += "var %s = {" % self.map_name
 
         if self.django_variables:
             html += self._render_from_variables(context)
@@ -100,13 +102,13 @@ class InjectionMapNode(template.Node):
         djangovars = function(django_vars, func) {
             var inject = [];
             for (var i = 0 ; i < django_vars.length ; i++) {
-                inject.push(djangovar_map[django_vars[i]]);
+                inject.push(%s[django_vars[i]]);
             }
 
             return func.apply(this, inject);
         };
         </script>
-        """
+        """ % self.map_name
 
         return html
 

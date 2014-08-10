@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: django-js-variable-injector
-Version: 1.0.8
+Version: 1.1.0
 Summary: A (more) elegant solution for injecting Django template variables into the context of an external Javascript file
 Home-page: https://github.com/steinbachr/django-js-variable-injector
 Author: Bobby Steinbach
@@ -9,4 +9,4 @@ License: MIT
 Description: A (more) elegant solution for injecting Django template variables into the context of an external Javascript file
 Keywords: django js injection template variables
 Platform: UNKNOWN
-Classifier: Development Status :: 3 - Alpha
+Classifier: Development Status :: 4 - Beta
