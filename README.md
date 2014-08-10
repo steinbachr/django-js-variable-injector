@@ -102,6 +102,14 @@ Omitting variables is also valid, i.e.:
 ````
 
 =====
+Configuration
+=====
+In ``settings.py`` the following configuration variables are available:
+
+* ``INJECTOR_MAP_NAME`` - The injector introduces a JS variable into the global namespace which *could* conceivably conflict with another name (by default, this variable is called ``djangovars_map``). To override this name, set this variable to a different value.
+
+
+=====
 Known Bugs / Planned Improvements
 =====
 1. Error catching
@@ -109,5 +117,5 @@ Known Bugs / Planned Improvements
 
 
 ===
-If you like the injector and are using it, please star or fork :)
+If you like the injector and are using it, please star and/or fork :)
 
