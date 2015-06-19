@@ -22,7 +22,7 @@ Now, to actually use the injector you simply must:
 Of course, I will elaborate. We'll use the following as an example:
 
 **views.py**
-````
+```python
 def myview(request):
   return render(request, 'test.html', {
     'yo': 'a',
@@ -33,13 +33,13 @@ def myview(request):
       'b': 2
     }
   })
-````
+```
 
 
 Now, we have two different ways that we can inject the variables. Here is the first:
 
 **test.html**
-````
+```htmldjango
 {% load js_injector %}
 
 <!DOCTYPE html>
@@ -53,12 +53,12 @@ Now, we have two different ways that we can inject the variables. Here is the fi
 	....
 </body>
 </html>
-````
+```
 This would result in the entire contents of the context being added. 
 
 The other (more granular) way is as follows:
 **test.html**
-````
+```htmldjango
 {% load js_injector %}
 
 <!DOCTYPE html>
@@ -72,20 +72,20 @@ The other (more granular) way is as follows:
 	....
 </body>
 </html>
-````
+```
 This would result in ONLY yo, mr_white, science, and bitch variables being injected. Regardless of which method you choose, the following Javascript is how you would inject the variables into a namespace.
 
 **injector_test.js**
-````
+```htmldjango
 djangovars(['yo', 'mr_white', 'science', 'bitch'], function(y, m, s, b) {
     ... your logic here ...
 });
-````
+```
 
 Omitting variables is also valid, i.e.:
 
 **test.html**
-````
+```htmldjango
 {% load js_injector %}
 
 <!DOCTYPE html>
@@ -99,7 +99,7 @@ Omitting variables is also valid, i.e.:
 	....
 </body>
 </html>
-````
+```
 
 =====
 Configuration
